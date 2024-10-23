@@ -28,7 +28,8 @@ class CheckoutScreenContent extends StatefulWidget {
 
 class _CheckoutScreenContentState extends State<CheckoutScreenContent> {
   final cardHolderController = TextEditingController();
-  final cardNumberMaskFormatter = MaskTextInputFormatter(mask: '#### #### #### ####');
+  final cardNumberMaskFormatter =
+      MaskTextInputFormatter(mask: '#### #### #### ####');
   final expireDateFormatter = MaskTextInputFormatter(mask: '##/##');
   final cvcDateFormatter = MaskTextInputFormatter(mask: '###');
 
@@ -64,7 +65,7 @@ class _CheckoutScreenContentState extends State<CheckoutScreenContent> {
             final snackBar = SnackBar(
               content: Text(command.message),
             );
-            Scaffold.of(context).showSnackBar(snackBar);
+            ScaffoldMessenger.of(context).showSnackBar(snackBar);
           }
         },
         child: BlocBuilder<CheckoutBloc, CheckoutState>(
@@ -164,10 +165,8 @@ class _CheckoutScreenContentState extends State<CheckoutScreenContent> {
                         ),
                         onPressed: () => _onPayClick(context),
                       ),
-                      if (state.isGooglePayAvailable)
-                        GooglePaySection(),
-                      if (state.isApplePayAvailable)
-                        ApplePaySection(),
+                      if (state.isGooglePayAvailable) GooglePaySection(),
+                      if (state.isApplePayAvailable) ApplePaySection(),
                     ],
                   ),
                 ),
